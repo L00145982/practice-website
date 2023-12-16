@@ -5,48 +5,38 @@
   What they do. 
   How I'd explain JSX is JavaScript meets HTML
 */
+
+/* This exercise went through working with the Itenery operator and how it can be implemented
+   in React to conditionally display Elements. */
 import './App.css';
+import {User} from './User'
 
 function App() {
-  /* Normal Javascript function as it does not return any JSX tags such as <h1>,<p>, etc...
-  const getName = () => {
-    return "Stephen"
-  } 
-  */
-
-  /*  This is a component as it uses JSX as you can see with the HTML like elements
-  Components must start with a Capital letter (Best practices)  */
-  const GetInfoComponent = (props) =>{
-    return (
-      <div>
-        <h3>{props.name}</h3>
-        <h3>{props.age}</h3>
-        <h3>{props.email}</h3>
-      </div>
-    )
-  };
-
-  /*  Props allows the values to be passed through when the component is called
-  with example <Job salary={2500}...  */
-  const Job = (props) =>{
-    return (
-    <div>
-      <h1>Job Listing</h1>
-      <h3>Salary : {props.Salary}</h3>
-      <h3>position : {props.position}</h3>
-      <h3>Salary : {props.company}</h3>
-    </div>
-    )
-  }
-
+  //variables
+  const age = 18;
+  const isGreen = true;
+  const users = [
+    {name: "Stephen", age: 23},
+    {name: "Sian", age: 25},
+    {name: "Rhys", age: 6},
+    {name: "Kayla", age: 3}
+  ];
+  
   return (
-    <div className='App'>
-      <GetInfoComponent name="Stephen" age={23} email="Stephenod30@gmail.com"/>
-      <GetInfoComponent name="Sian" age={25} email="Siansmith9850@gmail.com"/>
-      <br/>
-      <Job Salary={35000} position="Software Engineer" company="Alchemy"/>
-      <Job Salary={45000} position="Senior Developer" company="All State"/>
-      <Job Salary={27500} position="Bussiness Analyst" company="Optum"/>
+    <div className="App">
+      <div className='conditionalElements'>
+        {age>=18 ? <h1>OverAge</h1> : <h1>Underage</h1>} 
+        <h1 style={{color: isGreen ? "green" : "red"}}>This text has colour</h1>
+        {isGreen && <button>Do NOT Click this Button</button>}
+      </div>
+      <div className='Lists'>
+        {users.map((user,key)=>{
+          return <User name={user.name} age={user.age}/>
+        })}
+      </div>
+      <div className='exercises'>
+        To be completed... 
+      </div>
     </div>
   );
 }
