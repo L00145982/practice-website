@@ -21,6 +21,16 @@ function App() {
     {name: "Rhys", age: 6},
     {name: "Kayla", age: 3}
   ];
+
+  const planets = [
+    {name: "Earth", isGasPlanet: false},
+    {name: "Venus",isGasPlanet: false},
+    {name: "Jupiter", isGasPlanet: true},
+    {name: "Neptune", isGasPlanet: true},
+    {name: "Uranus", isGasPlanet: true},
+    {name: "Mars", isGasPlanet: false}
+  ];
+
   
   return (
     <div className="App">
@@ -35,7 +45,9 @@ function App() {
         })}
       </div>
       <div className='exercises'>
-        To be completed... 
+        {planets.map((planets, key)=>
+          !planets.isGasPlanet && <h1>{planets.name}</h1>
+        )}
       </div>
     </div>
   );
