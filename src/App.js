@@ -1,52 +1,65 @@
-/*
-  Stephen O'Donnell 
-  Important!! :  this app is used to help me gain a better understanding of React,
-  there will be a lot of Comments within the code to help explain what things are,
-  What they do. 
-  How I'd explain JSX is JavaScript meets HTML
+/*  
+    ___________________________________________
+        UseState Hooks and States in React
+    ___________________________________________
+    1. What are states? 
+      React will render the page once at load so you will be unable to change the
+      data displayed on the webpage by normal methods. 
+    2. UseStates are used to change the value on the webpage.   
+
 */
 import './App.css';
+import {useState} from "react";
 
 function App() {
-  /* Normal Javascript function as it does not return any JSX tags such as <h1>,<p>, etc...
-  const getName = () => {
-    return "Stephen"
-  } 
-  */
+  
+  //     [var, function] --> function is typically used to set/change the variable for future re-renders
+  const [age, setAge] = useState(0);
+  const [uInput,setUInput] = useState(undefined);
+  const [showTitle, setTitle] = useState(true);
+  const [textColor, setTextColor] = useState("black");
+  const [count, setCount] = useState(0);
 
-  /*  This is a component as it uses JSX as you can see with the HTML like elements
-  Components must start with a Capital letter (Best practices)  */
-  const GetInfoComponent = (props) =>{
-    return (
-      <div>
-        <h3>{props.name}</h3>
-        <h3>{props.age}</h3>
-        <h3>{props.email}</h3>
-      </div>
-    )
+  const increaseAge = () => {
+    //setAge function thats created in the UseState
+    setAge(age + 1);
   };
+  
+/* 
+  event is used in JS and HTML to help retrieve the data that is inserted into an input
+  event.target.value - retrieves the value of the input that calls the function and sets the uInput to the value. 
+*/
+  const handleInputChange = (event) => { 
+    setUInput(event.target.value) 
+ }
 
-  /*  Props allows the values to be passed through when the component is called
-  with example <Job salary={2500}...  */
-  const Job = (props) =>{
-    return (
-    <div>
-      <h1>Job Listing</h1>
-      <h3>Salary : {props.Salary}</h3>
-      <h3>position : {props.position}</h3>
-      <h3>Salary : {props.company}</h3>
-    </div>
-    )
-  }
+ const handleTitleEvent = () => {
+    setTitle(!showTitle);
+    setTextColor(textColor ==="black" ? "green" : "black");
+ }
+
+ const increaseCount = () => {
+    setCount(count + 1);
+ }
+
+ const decreaseCount = () => {
+    setCount(count - 1);
+ }
+
+ const resetCount = () => {
+    setCount(0);
+ }
 
   return (
     <div className='App'>
-      <GetInfoComponent name="Stephen" age={23} email="Stephenod30@gmail.com"/>
-      <GetInfoComponent name="Sian" age={25} email="Siansmith9850@gmail.com"/>
-      <br/>
-      <Job Salary={35000} position="Software Engineer" company="Alchemy"/>
-      <Job Salary={45000} position="Senior Developer" company="All State"/>
-      <Job Salary={27500} position="Bussiness Analyst" company="Optum"/>
+      {showTitle && <h1>This is a Title</h1>}
+      <h2 style={{color: textColor}}>This text can change color on the buutton click</h2> <br/>
+      <button onClick={handleTitleEvent}>Show/Hide Title Bar</button><br/>
+      {age} - <button onClick={increaseAge}>Increase Age</button> <br/>
+      <input type='text' onChange={handleInputChange} /> : {uInput} <br/>
+      <h1>Exercise</h1><br/>
+      <h2>{count}</h2>
+      <button onClick={increaseCount}> + </button> <button onClick={decreaseCount}> - </button> <button onClick={resetCount}> reset </button>
     </div>
   );
 }
