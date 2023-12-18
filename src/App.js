@@ -31,7 +31,12 @@ function App() {
     {name: "Mars", isGasPlanet: false}
   ];
 
-  
+  /*  
+      1. The isGreen && <button>.... is an itenery operator that displays the button if the isGreen value is true.
+      2. user.map() retrieves the data from the users array of objects and allows you to display the contents in this case
+         the data is used through the User Component which is initiated through a seperate Users.js file
+  */
+
   return (
     <div className="App">
       <div className='conditionalElements'>
